@@ -15,10 +15,30 @@ Ext.define('Users.controller.Main', {
             },
 			'main userform button[action=save]': {
                 tap: 'saveUser'
+            },
+			'main userform button[action=Capture]': {
+                tap: 'captureImage'
             }
         }
     },
 
+	
+	captureImage:function(){
+	
+	Ext.device.Camera.capture({
+    success: function(image) {
+		var img = Ext.getCmp('imagedata');
+                        img.setSrc('data:image/jpeg;base64,' +imagedata);    },
+    quality: 75,
+    width: 300,
+    height: 300,
+    destination: 'data',
+    source: 'camera',
+    encoding: 'jpg'
+});
+	
+	},
+	
     showUserForm: function() {
         this.getMain().animateActiveItem(this.getMain().down('userform'), {
             type: 'slide',
